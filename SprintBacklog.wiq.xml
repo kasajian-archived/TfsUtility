@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkItemQuery Version="1">
+  <Wiql>
+    SELECT [System.Id], [System.Title], [Microsoft.VSTS.Common.BacklogPriority], [System.AssignedTo], [System.State], [Microsoft.VSTS.Scheduling.RemainingWork], [Microsoft.VSTS.CMMI.Blocked], [System.WorkItemType]
+      FROM WorkItemLinks
+     WHERE Source.[System.TeamProject] = @project
+       AND Source.[System.WorkItemType] IN GROUP 'Microsoft.RequirementCategory'
+       AND Source.[System.IterationPath] UNDER @project
+       AND Source.[System.State] IN ('New','Approved','Committed','Done')
+       AND Source.[System.AreaPath] UNDER @project
+       AND [System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward'
+       AND (
+               (Target.[System.WorkItemType] IN GROUP 'Microsoft.TaskCategory'
+               AND Target.[System.IterationPath] UNDER '$$PROJECTNAME$$\Release 1\Sprint 1'
+               AND Target.[System.State] IN ('To Do','In Progress','Done')
+               AND Target.[System.AreaPath] UNDER @project)
+               OR
+               (Target.[System.WorkItemType] IN GROUP 'Microsoft.RequirementCategory'
+               AND Target.[System.IterationPath] UNDER '$$PROJECTNAME$$\Release 1\Sprint 1'
+               AND Target.[System.State] IN ('New','Approved','Committed','Done')
+               AND Target.[System.AreaPath] UNDER @project)
+           )
+  ORDER BY [Microsoft.VSTS.Common.BacklogPriority] ASC,[System.Id] ASC
+      MODE (Recursive, ReturnMatchingChildren)
+  </Wiql>
+</WorkItemQuery>

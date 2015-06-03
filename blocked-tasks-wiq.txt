@@ -1,0 +1,8 @@
+SELECT [System.Id], [System.WorkItemType], [System.Title], [Microsoft.VSTS.Common.BacklogPriority], [System.AssignedTo], [System.State], [Microsoft.VSTS.CMMI.Blocked]
+FROM WorkItems
+WHERE [System.TeamProject] = @project
+AND [System.IterationPath] UNDER 'scrum-test-20131023\Release 1\Sprint 1'
+AND [System.WorkItemType] IN GROUP 'Microsoft.TaskCategory'
+AND [Microsoft.VSTS.CMMI.Blocked] = 'Yes'
+AND [System.State] <> 'Removed'
+ORDER BY [Microsoft.VSTS.Common.BacklogPriority], [System.Id]

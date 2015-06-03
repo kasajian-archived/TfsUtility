@@ -1,0 +1,14 @@
+# query list
+tfsutility listworkitemqueries /collection:http://demotfs2013:8080/tfs/defaultcollection /project:scrum-test-20131023 /filter:"shared queries/current sprint"
+
+# folder list
+tfsutility listworkitemqueryfolders /collection:http://demotfs2013:8080/tfs/defaultcollection /project:scrum-test-20131023 /filter:"shared queries/current sprint"
+
+# export query
+tfsutility workitemqueryexport /collection:http://demotfs2013:8080/tfs/defaultcollection /project:scrum-test-20131023 /query:"Shared Queries/Current Sprint/Blocked Tasks"
+
+# export query to file
+tfsutility workitemqueryexport /collection:http://demotfs2013:8080/tfs/defaultcollection /project:scrum-test-20131023 /query:"Shared Queries/Current Sprint/Blocked Tasks" /filename:.\output.txt
+
+# import query from file
+tfsutility workitemqueryimport /collection:http://demotfs2013:8080/tfs/defaultcollection /project:scrum-test-20131023 /folder:"Shared Queries/Current Sprint" /name:"Uploaded Work Item Query" /filename:.\output.txt
