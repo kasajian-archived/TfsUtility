@@ -1,12 +1,9 @@
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public class WorkItemQueryListCommand : TfsCommandBase
     {
@@ -31,9 +28,7 @@ namespace Benday.TfsUtility
             base.DisplayUsage(builder);
 
             string usageString =
-                String.Format("{0} {1} /collection:collectionurl /project:projectname [/filter:folderpath]",
-                TfsUtilityConstants.ExeName,
-                CommandArgumentName);
+                $"{TfsUtilityConstants.ExeName} {CommandArgumentName} /collection:collectionurl /project:projectname [/filter:folderpath]";
 
             builder.AppendLine(usageString);
         }
@@ -64,7 +59,7 @@ namespace Benday.TfsUtility
 
             string folderFilter = null;
 
-            if (hasFolderFilter == true)
+            if (hasFolderFilter)
             {
                 folderFilter = Utilities.GetFolderFilter(Arguments[TfsUtilityConstants.ArgumentNameFolderFilter], project.Name);
             }
@@ -92,7 +87,7 @@ namespace Benday.TfsUtility
             }
             else
             {
-                if (Utilities.PathMatchesFilter(hasFolderFilter, folderFilter, item.Path) == true)
+                if (Utilities.PathMatchesFilter(hasFolderFilter, folderFilter, item.Path))
                 {
                     paths.Add(item.Path);
                 }

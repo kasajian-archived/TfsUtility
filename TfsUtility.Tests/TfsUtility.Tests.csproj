@@ -6,9 +6,9 @@
     <ProjectGuid>{3B7D155C-CC58-4068-B298-BDC05BA6DE0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Benday.TfsUtility.Tests</RootNamespace>
-    <AssemblyName>Benday.TfsUtility.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>TfsUtility.Tests</RootNamespace>
+    <AssemblyName>TfsUtility.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,9 +64,9 @@
     <Compile Include="WorkItemQueryListCommandFixture.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Benday.TfsUtility\Benday.TfsUtility.csproj">
+    <ProjectReference Include="..\TfsUtility\TfsUtility.csproj">
       <Project>{45ee859e-915a-44b6-9b41-7ebc44499ab8}</Project>
-      <Name>Benday.TfsUtility</Name>
+      <Name>TfsUtility</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     class Program
     {
@@ -61,8 +57,6 @@ namespace Benday.TfsUtility
 
             builder.AppendLine();
             builder.AppendLine("Team Foundation Server Utility");
-            builder.AppendLine("Benjamin Day Consulting, Inc.");
-            builder.AppendLine("www.benday.com");
             builder.AppendLine();
             builder.AppendLine("Available commands:");
             builder.AppendLine(indent + TfsUtilityConstants.CommandArgumentNameTeamProjectList);

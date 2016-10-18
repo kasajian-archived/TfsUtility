@@ -1,8 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
-namespace Benday.TfsUtility.Tests
+namespace TfsUtility.Tests
 {
     [TestClass]
     public class WorkItemQueryImportCommandFixture : UnitTestBase
@@ -10,24 +9,24 @@ namespace Benday.TfsUtility.Tests
         [TestInitialize]
         public void OnTestInitialize()
         {
-            _SystemUnderTest = null;
+            _systemUnderTest = null;
             Args = null;
         }
 
         public string[] Args { get; set; }
 
-        private WorkItemQueryImportCommand _SystemUnderTest;
+        private WorkItemQueryImportCommand _systemUnderTest;
         public WorkItemQueryImportCommand SystemUnderTest
         {
             get
             {
-                if (_SystemUnderTest == null)
+                if (_systemUnderTest == null)
                 {
-                    _SystemUnderTest =
+                    _systemUnderTest =
                         new WorkItemQueryImportCommand(Args);
                 }
 
-                return _SystemUnderTest;
+                return _systemUnderTest;
             }
         }
 
@@ -111,7 +110,7 @@ namespace Benday.TfsUtility.Tests
 
             Console.WriteLine(wiql);
 
-            Assert.IsFalse(String.IsNullOrWhiteSpace(wiql), "string was empty");
+            Assert.IsFalse(string.IsNullOrWhiteSpace(wiql), "string was empty");
         }
 
         [TestMethod]
@@ -123,7 +122,7 @@ namespace Benday.TfsUtility.Tests
 
             Console.WriteLine(wiql);
 
-            Assert.IsFalse(String.IsNullOrWhiteSpace(wiql), "string was empty");
+            Assert.IsFalse(string.IsNullOrWhiteSpace(wiql), "string was empty");
         }
 
         [TestMethod]
@@ -135,7 +134,7 @@ namespace Benday.TfsUtility.Tests
 
             Console.WriteLine(wiql);
 
-            Assert.IsFalse(String.IsNullOrWhiteSpace(wiql), "string was empty");
+            Assert.IsFalse(string.IsNullOrWhiteSpace(wiql), "string was empty");
         }
 
         [TestMethod]

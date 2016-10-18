@@ -1,13 +1,10 @@
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.IO;
+using System.Text;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public class WorkItemQueryExportCommand : TfsCommandBase
     {
@@ -34,9 +31,7 @@ namespace Benday.TfsUtility
             base.DisplayUsage(builder);
 
             string usageString =
-                String.Format("{0} {1} /collection:collectionurl /project:projectname /query:querypath [/filename:filepath]",
-                TfsUtilityConstants.ExeName,
-                CommandArgumentName);
+                $"{TfsUtilityConstants.ExeName} {CommandArgumentName} /collection:collectionurl /project:projectname /query:querypath [/filename:filepath]";
 
             builder.AppendLine(usageString);
         }
@@ -68,10 +63,7 @@ namespace Benday.TfsUtility
             {
                 return null;
             }
-            else
-            {
-                return match.QueryText;
-            }
+            return match.QueryText;
         }
 
         private QueryItem FindQuery(QueryHierarchy projectQueryHierarchy, string searchQueryPath)
@@ -97,17 +89,11 @@ namespace Benday.TfsUtility
             {
                 return FindQuery(item as QueryFolder, searchQueryPath);
             }
-            else
+            if (Utilities.PathMatchesFilter(true, searchQueryPath, item.Path))
             {
-                if (Utilities.PathMatchesFilter(true, searchQueryPath, item.Path) == true)
-                {
-                    return item;
-                }
-                else
-                {
-                    return null;
-                }
+                return item;
             }
+            return null;
         }
 
         private QueryItem FindQuery(QueryFolder folder, string searchQueryPath)
@@ -146,7 +132,7 @@ namespace Benday.TfsUtility
 
                 var result = GetResult();
                 
-                if (String.IsNullOrWhiteSpace(result) == true)
+                if (string.IsNullOrWhiteSpace(result))
                 {
                     Console.WriteLine("Could not locate the query.");
                 }
@@ -154,7 +140,7 @@ namespace Benday.TfsUtility
                 {
                     File.WriteAllText(filename, result);
 
-                    Console.WriteLine(String.Format("Query written to '{0}'.", info.FullName));
+                    Console.WriteLine($"Query written to '{info.FullName}'.");
                 }
             }
         }

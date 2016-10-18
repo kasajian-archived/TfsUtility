@@ -1,13 +1,9 @@
-using Microsoft.TeamFoundation.Client;
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public static class XmlUtilityExtensionMethods
     {
@@ -17,14 +13,11 @@ namespace Benday.TfsUtility
             {
                 return null;
             }
-            else
-            {
-                var result = (from temp in parent.Elements()
-                              where temp.Name.LocalName == name
-                              select temp);
+            var result = (from temp in parent.Elements()
+                where temp.Name.LocalName == name
+                select temp);
 
-                return result;
-            }
+            return result;
         }
 
         public static XElement ElementByLocalName(this XElement parent, string name)
@@ -33,14 +26,11 @@ namespace Benday.TfsUtility
             {
                 return null;
             }
-            else
-            {
-                var result = (from temp in parent.Elements()
-                              where temp.Name.LocalName == name
-                              select temp).FirstOrDefault();
+            var result = (from temp in parent.Elements()
+                where temp.Name.LocalName == name
+                select temp).FirstOrDefault();
 
-                return result;
-            }
+            return result;
         }
 
         public static XElement ElementByLocalNameAndAttributeValue(this XElement parent,
@@ -52,7 +42,7 @@ namespace Benday.TfsUtility
 
             var match = (from temp in matchingElementsByName
                          where
-                         temp.HasAttributes == true &&
+                         temp.HasAttributes &&
                          temp.AttributeValue(attributeName) == attributeValue
                          select temp).FirstOrDefault();
 
@@ -73,30 +63,24 @@ namespace Benday.TfsUtility
             {
                 return null;
             }
-            else
-            {
-                return child.Value;
-            }
+            return child.Value;
         }
 
         public static string AttributeValue(this XElement parent, string attributeName)
         {
             if (parent == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
-            else if (parent.HasAttributes == false)
+            if (parent.HasAttributes == false)
             {
-                return String.Empty;
+                return string.Empty;
             }
-            else if (parent.Attribute(attributeName) == null)
+            if (parent.Attribute(attributeName) == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
-            else
-            {
-                return parent.Attribute(attributeName).Value;
-            }
+            return parent.Attribute(attributeName).Value;
         }
     }
 }

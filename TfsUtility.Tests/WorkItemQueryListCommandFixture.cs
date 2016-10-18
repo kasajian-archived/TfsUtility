@@ -1,8 +1,8 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Benday.TfsUtility.Tests
+namespace TfsUtility.Tests
 {
 
     [TestClass]
@@ -11,23 +11,23 @@ namespace Benday.TfsUtility.Tests
         [TestInitialize]
         public void OnTestInitialize()
         {
-            _SystemUnderTest = null;
+            _systemUnderTest = null;
             Args = null;
         }
         public string[] Args { get; set; }
 
-        private WorkItemQueryListCommand _SystemUnderTest;
+        private WorkItemQueryListCommand _systemUnderTest;
         public WorkItemQueryListCommand SystemUnderTest
         {
             get
             {
-                if (_SystemUnderTest == null)
+                if (_systemUnderTest == null)
                 {
-                    _SystemUnderTest =
+                    _systemUnderTest =
                         new WorkItemQueryListCommand(Args);
                 }
 
-                return _SystemUnderTest;
+                return _systemUnderTest;
             }
         }
         [TestMethod]
@@ -125,13 +125,13 @@ namespace Benday.TfsUtility.Tests
         private void AssertContainsQuery(List<string> actualQueryPaths, string expectedQueryPath)
         {
             Assert.IsTrue(actualQueryPaths.Contains(expectedQueryPath),
-                String.Format("'{0}' was not in the result.", expectedQueryPath));
+                $"'{expectedQueryPath}' was not in the result.");
         }
 
         private void AssertDoesNotContainQuery(List<string> actualQueryPaths, string expectedQueryPath)
         {
             Assert.IsFalse(actualQueryPaths.Contains(expectedQueryPath),
-                String.Format("'{0}' was in the result.", expectedQueryPath));
+                $"'{expectedQueryPath}' was in the result.");
         }
     }
 }

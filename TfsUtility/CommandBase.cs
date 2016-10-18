@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public abstract class CommandBase
     {
@@ -15,6 +13,7 @@ namespace Benday.TfsUtility
 
             _Arguments = GetArgsAsDictionary(args);
 
+            // ToDo: Get rid of virtual-method calls in constructor
             ValidateArguments();
             AfterValidateArguments();
         }
@@ -44,7 +43,7 @@ namespace Benday.TfsUtility
 
             builder.AppendLine("Invalid or missing arguments.");
 
-            missingArgs.ForEach(x => builder.AppendLine(String.Format("- '{0}' is required.'", x)));
+            missingArgs.ForEach(x => builder.AppendLine($"- '{x}' is required.'"));
 
             Console.WriteLine(builder.ToString());
 
@@ -89,8 +88,6 @@ namespace Benday.TfsUtility
         {
             builder.AppendLine();
             builder.AppendLine("Team Foundation Server Utility");
-            builder.AppendLine("Benjamin Day Consulting, Inc.");
-            builder.AppendLine("www.benday.com");
             builder.AppendLine();            
         }
 
@@ -114,10 +111,7 @@ namespace Benday.TfsUtility
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         private void DebugArgDictionary(Dictionary<string, string> argsAsDictionary)
@@ -136,7 +130,7 @@ namespace Benday.TfsUtility
 
             foreach (var arg in args)
             {
-                if (String.IsNullOrWhiteSpace(arg) == false &&
+                if (string.IsNullOrWhiteSpace(arg) == false &&
                     arg.StartsWith("/") == true &&
                     arg.Contains(":") == true)
                 {
@@ -171,10 +165,7 @@ namespace Benday.TfsUtility
             {
                 return argValue.Substring(1);
             }
-            else
-            {
-                return argValue;
-            }
+            return argValue;
         }
 
         private string RemoveTrailingQuote(string argValue)
@@ -183,10 +174,7 @@ namespace Benday.TfsUtility
             {
                 return argValue.Substring(0, argValue.Length - 1);
             }
-            else
-            {
-                return argValue;
-            }
+            return argValue;
         }
         public abstract void Run();
     }

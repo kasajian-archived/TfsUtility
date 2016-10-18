@@ -1,8 +1,8 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Benday.TfsUtility.Tests
+namespace TfsUtility.Tests
 {
     [TestClass]
     public class TeamProjectListCommandFixture : UnitTestBase
@@ -10,23 +10,23 @@ namespace Benday.TfsUtility.Tests
         [TestInitialize]
         public void OnTestInitialize()
         {
-            _SystemUnderTest = null;
+            _systemUnderTest = null;
             Args = null;
         }
         public string[] Args { get; set; }
 
-        private TeamProjectListCommand _SystemUnderTest;
+        private TeamProjectListCommand _systemUnderTest;
         public TeamProjectListCommand SystemUnderTest
         {
             get
             {
-                if (_SystemUnderTest == null)
+                if (_systemUnderTest == null)
                 {
-                    _SystemUnderTest =
+                    _systemUnderTest =
                         new TeamProjectListCommand(Args);
                 }
 
-                return _SystemUnderTest;
+                return _systemUnderTest;
             }
         }
         [TestMethod]
@@ -63,7 +63,7 @@ namespace Benday.TfsUtility.Tests
         private void AssertContainsProject(List<string> actualProjects, string expectedProjectName)
         {
             Assert.IsTrue(actualProjects.Contains(expectedProjectName),
-                String.Format("'{0}' was not in the result.", expectedProjectName));
+                $"'{expectedProjectName}' was not in the result.");
         }
     }
 }

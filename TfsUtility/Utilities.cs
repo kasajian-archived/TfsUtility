@@ -1,11 +1,6 @@
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public static class Utilities
     {
@@ -22,18 +17,12 @@ namespace Benday.TfsUtility
             {
                 return true;
             }
-            else
+            if (path != null &&
+                path.ToLower().StartsWith(folderFilter))
             {
-                if (path != null &&
-                    path.ToLower().StartsWith(folderFilter) == true)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
+            return false;
         }
 
         public static string GetQueryFilter(string queryName, string teamProjectName)
@@ -45,7 +34,7 @@ namespace Benday.TfsUtility
         {
             string template;
 
-            if (folderFilter.StartsWith("/") == true)
+            if (folderFilter.StartsWith("/"))
             {
                 template = "{0}{1}";
             }
@@ -54,7 +43,7 @@ namespace Benday.TfsUtility
                 template = "{0}/{1}";
             }
 
-            return String.Format(template, teamProjectName, folderFilter).ToLower();
+            return string.Format(template, teamProjectName, folderFilter).ToLower();
         }
     }
 }

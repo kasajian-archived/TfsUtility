@@ -1,14 +1,11 @@
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.IO;
+using System.Text;
 using System.Xml.Linq;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public class WorkItemQueryImportCommand : TfsCommandBase
     {
@@ -23,12 +20,13 @@ namespace Benday.TfsUtility
 
         protected override List<string> GetRequiredArguments()
         {
-            var argumentNames = new List<string>();
-
-            argumentNames.Add(TfsUtilityConstants.ArgumentNameTfsCollection);
-            argumentNames.Add(TfsUtilityConstants.ArgumentNameTeamProject);
-            argumentNames.Add(TfsUtilityConstants.ArgumentNameQueryName);
-            argumentNames.Add(TfsUtilityConstants.ArgumentNameFolder);
+            var argumentNames = new List<string>
+            {
+                TfsUtilityConstants.ArgumentNameTfsCollection,
+                TfsUtilityConstants.ArgumentNameTeamProject,
+                TfsUtilityConstants.ArgumentNameQueryName,
+                TfsUtilityConstants.ArgumentNameFolder
+            };
 
             return argumentNames;
         }
@@ -38,9 +36,7 @@ namespace Benday.TfsUtility
             base.DisplayUsage(builder);
 
             string usageString =
-                String.Format("{0} {1} /collection:collectionurl /project:projectname /folder:folderpath /name:queryname /filename:filepath",
-                TfsUtilityConstants.ExeName,
-                CommandArgumentName);
+                $"{TfsUtilityConstants.ExeName} {CommandArgumentName} /collection:collectionurl /project:projectname /folder:folderpath /name:queryname /filename:filepath";
 
             builder.AppendLine(usageString);
         }
@@ -81,19 +77,16 @@ namespace Benday.TfsUtility
             {
                 throw new InvalidOperationException("Work item query text is XML but the root node is not WorkItemQuery.");
             }
-            else
+            var wiql = doc.Root.ElementValue("Wiql");
+
+            if (string.IsNullOrWhiteSpace(wiql))
             {
-                var wiql = doc.Root.ElementValue("Wiql");
-
-                if (String.IsNullOrWhiteSpace(wiql) == true)
-                {
-                    throw new InvalidOperationException("Work item query text is XML but the wiql node does not exist or is empty.");
-                }
-
-                string teamProjectNameArgValue = Arguments[TfsUtilityConstants.ArgumentNameTeamProject];
-
-                QueryText = wiql.Replace("$$PROJECTNAME$$", teamProjectNameArgValue);
+                throw new InvalidOperationException("Work item query text is XML but the wiql node does not exist or is empty.");
             }
+
+            string teamProjectNameArgValue = Arguments[TfsUtilityConstants.ArgumentNameTeamProject];
+
+            QueryText = wiql.Replace("$$PROJECTNAME$$", teamProjectNameArgValue);
         }
 
         private void ReadQueryFromFile()
@@ -117,19 +110,13 @@ namespace Benday.TfsUtility
                 {
                     continue;
                 }
-                else
+                if (item.Name != QueryName)
                 {
-                    if (item.Name != QueryName)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        item.Delete();
-                        WorkItemQueryFolder.Project.QueryHierarchy.Save();
-                        break;
-                    }
+                    continue;
                 }
+                item.Delete();
+                WorkItemQueryFolder.Project.QueryHierarchy.Save();
+                break;
             }
         }
 
@@ -143,19 +130,19 @@ namespace Benday.TfsUtility
             WorkItemQueryFolder.Project.QueryHierarchy.Save();
         }
 
-        private QueryFolder _WorkItemQueryFolder;
+        private QueryFolder _workItemQueryFolder;
         public QueryFolder WorkItemQueryFolder
         {
             get
             {
-                if (_WorkItemQueryFolder == null)
+                if (_workItemQueryFolder == null)
                 {
                     Connect();
 
-                    _WorkItemQueryFolder = FindFolder();
+                    _workItemQueryFolder = FindFolder();
                 }
 
-                return _WorkItemQueryFolder;
+                return _workItemQueryFolder;
             }
         }
 
@@ -199,19 +186,13 @@ namespace Benday.TfsUtility
         {
             if (item is QueryFolder)
             {
-                if (Utilities.PathMatchesFilter(true, searchQueryPath, item.Path) == true)
+                if (Utilities.PathMatchesFilter(true, searchQueryPath, item.Path))
                 {
                     return item as QueryFolder;
                 }
-                else
-                {
-                    return FindFolder(item as QueryFolder, searchQueryPath);
-                }                
+                return FindFolder(item as QueryFolder, searchQueryPath);
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         private QueryFolder FindFolder(QueryFolder folder, string searchQueryPath)

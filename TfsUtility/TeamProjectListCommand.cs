@@ -1,13 +1,9 @@
-using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using System.IO;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public class TeamProjectListCommand : TfsCommandBase
     {
@@ -31,9 +27,7 @@ namespace Benday.TfsUtility
             base.DisplayUsage(builder);
 
             string usageString =
-                String.Format("{0} {1} /collection:collectionurl",
-                TfsUtilityConstants.ExeName,
-                CommandArgumentName);
+                $"{TfsUtilityConstants.ExeName} {CommandArgumentName} /collection:collectionurl";
 
             builder.AppendLine(usageString);
         }

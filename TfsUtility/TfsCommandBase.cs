@@ -1,12 +1,8 @@
+using System;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Benday.TfsUtility
+namespace TfsUtility
 {
     public abstract class TfsCommandBase : CommandBase
     {
@@ -37,7 +33,7 @@ namespace Benday.TfsUtility
 
         protected void Connect(string tfsUrl)
         {
-            if (String.IsNullOrEmpty(tfsUrl))
+            if (string.IsNullOrEmpty(tfsUrl))
                 throw new ArgumentException("tfsUrl is null or empty.", "tfsUrl");
             
             Uri uri = new Uri(tfsUrl);
@@ -55,7 +51,7 @@ namespace Benday.TfsUtility
 
             foreach (Project item in store.Projects)
             {
-                if (String.Equals(item.Name, projectName, StringComparison.CurrentCultureIgnoreCase) == true)
+                if (string.Equals(item.Name, projectName, StringComparison.CurrentCultureIgnoreCase))
                 {
                     returnValue = item;
                     break;

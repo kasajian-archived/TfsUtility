@@ -1,17 +1,17 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benday.TfsUtility", "Benday.TfsUtility\Benday.TfsUtility.csproj", "{45EE859E-915A-44B6-9B41-7EBC44499AB8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benday.TfsUtility.Tests", "Benday.TfsUtility.Tests\Benday.TfsUtility.Tests.csproj", "{3B7D155C-CC58-4068-B298-BDC05BA6DE0C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA17C377-6522-4A9C-93A3-EE4AD97CA19A}"
 	ProjectSection(SolutionItems) = preProject
 		blocked-tasks-wiq.txt = blocked-tasks-wiq.txt
 		sample-command-lines.txt = sample-command-lines.txt
 		SprintBacklog.wiq.xml = SprintBacklog.wiq.xml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsUtility", "TfsUtility\TfsUtility.csproj", "{45EE859E-915A-44B6-9B41-7EBC44499AB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsUtility.Tests", "TfsUtility.Tests\TfsUtility.Tests.csproj", "{3B7D155C-CC58-4068-B298-BDC05BA6DE0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Benday.TfsUtility.Tests
+namespace TfsUtility.Tests
 {
     [TestClass]
     public class WorkItemQueryFolderListCommandFixture : UnitTestBase
@@ -10,23 +10,23 @@ namespace Benday.TfsUtility.Tests
         [TestInitialize]
         public void OnTestInitialize()
         {
-            _SystemUnderTest = null;
+            _systemUnderTest = null;
             Args = null;
         }
         public string[] Args { get; set; }
 
-        private WorkItemQueryFolderListCommand _SystemUnderTest;
+        private WorkItemQueryFolderListCommand _systemUnderTest;
         public WorkItemQueryFolderListCommand SystemUnderTest
         {
             get
             {
-                if (_SystemUnderTest == null)
+                if (_systemUnderTest == null)
                 {
-                    _SystemUnderTest =
+                    _systemUnderTest =
                         new WorkItemQueryFolderListCommand(Args);
                 }
 
-                return _SystemUnderTest;
+                return _systemUnderTest;
             }
         }
 
@@ -154,13 +154,13 @@ namespace Benday.TfsUtility.Tests
         private void AssertContainsFolder(List<string> actualFolderPaths, string expectedFolderPath)
         {
             Assert.IsTrue(actualFolderPaths.Contains(expectedFolderPath),
-                String.Format("'{0}' was not in the result.", expectedFolderPath));
+                $"'{expectedFolderPath}' was not in the result.");
         }
 
         private void AssertDoesNotContainFolder(List<string> actualFolderPaths, string expectedFolderPath)
         {
             Assert.IsFalse(actualFolderPaths.Contains(expectedFolderPath),
-                String.Format("'{0}' was in the result.", expectedFolderPath));
+                $"'{expectedFolderPath}' was in the result.");
         }
     }
 }

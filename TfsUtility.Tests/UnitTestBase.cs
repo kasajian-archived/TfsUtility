@@ -1,7 +1,6 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Benday.TfsUtility.Tests
+namespace TfsUtility.Tests
 {
     public class UnitTestBase
     {
@@ -27,7 +26,7 @@ namespace Benday.TfsUtility.Tests
         }
         protected string GetArgEntry(string argumentName, string value)
         {
-            return String.Format("/{0}:{1}", argumentName, value);
+            return $"/{argumentName}:{value}";
         }
         protected string[] CreateArgsArray(params string[] args)
         {

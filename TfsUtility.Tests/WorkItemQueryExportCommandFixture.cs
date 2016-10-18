@@ -1,8 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
-namespace Benday.TfsUtility.Tests
+namespace TfsUtility.Tests
 {
 
     [TestClass]
@@ -11,24 +10,24 @@ namespace Benday.TfsUtility.Tests
         [TestInitialize]
         public void OnTestInitialize()
         {
-            _SystemUnderTest = null;
+            _systemUnderTest = null;
             Args = null;
         }
 
         public string[] Args { get; set; }
 
-        private WorkItemQueryExportCommand _SystemUnderTest;
+        private WorkItemQueryExportCommand _systemUnderTest;
         public WorkItemQueryExportCommand SystemUnderTest
         {
             get
             {
-                if (_SystemUnderTest == null)
+                if (_systemUnderTest == null)
                 {
-                    _SystemUnderTest =
+                    _systemUnderTest =
                         new WorkItemQueryExportCommand(Args);
                 }
 
-                return _SystemUnderTest;
+                return _systemUnderTest;
             }
         }
 
@@ -74,7 +73,7 @@ namespace Benday.TfsUtility.Tests
 
             Console.WriteLine(wiql);
 
-            Assert.IsFalse(String.IsNullOrWhiteSpace(wiql), "string was empty");
+            Assert.IsFalse(string.IsNullOrWhiteSpace(wiql), "string was empty");
         }
     }
 }
